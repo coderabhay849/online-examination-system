@@ -81,8 +81,6 @@ http://localhost:9096/swagger-ui/index.html
 
 ## Postman Collection
 
-The Postman collection is available inside the `postman` folder.
+The Postman collection is available:
 
-```text
-postman/
-└── Online-Examination-System.postman_collection.json
+ Online-Examination-System.postman_collection.json
