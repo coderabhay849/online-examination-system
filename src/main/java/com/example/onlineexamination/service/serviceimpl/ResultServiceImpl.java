@@ -32,4 +32,16 @@ public class ResultServiceImpl implements ResultService {
         return resultRepository.findByAttemptId(attemptId)
                 .orElseThrow(() -> new RuntimeException("Result not found"));
     }
+    @Override
+    public String publishResult(Long attemptId) {
+
+        Result result = resultRepository.findByAttemptId(attemptId)
+                .orElseThrow(() -> new RuntimeException("Result not found"));
+
+        result.setPublished(true);
+        resultRepository.save(result);
+
+        return "Result published successfully";
+    }
+    
 }

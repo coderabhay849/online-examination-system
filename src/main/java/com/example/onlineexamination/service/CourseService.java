@@ -19,5 +19,7 @@ public interface CourseService {
 
     Course getCourseById(Long id);
     
+    Course assignInstructor(Long courseId, Long instructorId);
+    
     Page<Course> getCourses(int page, int size, String sortBy, String direction, String search);
 }

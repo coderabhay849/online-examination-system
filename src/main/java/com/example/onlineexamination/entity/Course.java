@@ -30,6 +30,18 @@ public class Course {
     public String getDescription() {
         return description;
     }
+    
+    @ManyToOne
+    @JoinColumn(name = "instructor_id")
+    private User instructor;
+    
+    public User getInstructor() {
+        return instructor;
+    }
+    
+    public void setInstructor(User instructor) {
+        this.instructor = instructor;
+    }
 
     public void setId(Long id) {
         this.id = id;

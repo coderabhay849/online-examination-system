@@ -78,4 +78,14 @@ public class CourseController {
                 courseService.getCourses(page, size, sortBy, direction, search)
         );
     }
+    @PutMapping("/{courseId}/assign-instructor/{instructorId}")
+    public ResponseEntity<Course> assignInstructor(
+            @PathVariable Long courseId,
+            @PathVariable Long instructorId) {
+
+        return ResponseEntity.ok(
+                courseService.assignInstructor(courseId, instructorId)
+        );
+    }
+    
 }

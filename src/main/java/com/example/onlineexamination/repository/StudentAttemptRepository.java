@@ -10,4 +10,6 @@ public interface StudentAttemptRepository extends JpaRepository<StudentAttempt, 
     List<StudentAttempt> findByStudentIdAndExamId(Long studentId, Long examId);
 
     List<StudentAttempt> findByStudentId(Long studentId);
+    
+    List<StudentAttempt> findBySubmittedFalse();
 }

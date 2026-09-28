@@ -54,4 +54,13 @@ public class ResultController {
                         "attachment; filename=result-" + attemptId + ".txt")
                 .body(content);
     }
+    @PutMapping("/{attemptId}/publish")
+    public ResponseEntity<String> publishResult(
+            @PathVariable Long attemptId) {
+
+        return ResponseEntity.ok(
+                resultService.publishResult(attemptId)
+        );
+    }
+    
 }

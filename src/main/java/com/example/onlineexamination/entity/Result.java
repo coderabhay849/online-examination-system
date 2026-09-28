@@ -21,6 +21,17 @@ public class Result {
     private Double percentage;
 
     private boolean passed;
+    
+    private boolean published = false;
+    
+    public boolean isPublished() {
+        return published;
+    }
+    
+    public void setPublished(boolean published) {
+        this.published = published;
+    }
+    
 
     public Result() {
     }

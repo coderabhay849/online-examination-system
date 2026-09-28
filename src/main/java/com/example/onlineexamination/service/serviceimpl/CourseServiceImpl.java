@@ -8,7 +8,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
-
+import com.example.onlineexamination.entity.User;
+import com.example.onlineexamination.repository.UserRepository;
 import org.springframework.stereotype.Service;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -19,12 +20,15 @@ import java.util.List;
 public class CourseServiceImpl implements CourseService {
 
     private final CourseRepository courseRepository;
+    private final UserRepository userRepository;
     private static final Logger logger =
             LoggerFactory.getLogger(CourseServiceImpl.class);
 
-    public CourseServiceImpl(CourseRepository courseRepository) {
-        this.courseRepository = courseRepository;
-    }
+    public CourseServiceImpl(CourseRepository courseRepository,
+            UserRepository userRepository) {
+this.courseRepository = courseRepository;
+this.userRepository = userRepository;
+}
 
     @Override
     public Course createCourse(CourseRequest request) {
@@ -93,5 +97,23 @@ public class CourseServiceImpl implements CourseService {
         }
 
         return courseRepository.findAll(pageable);
+    }
+    
+    @Override
+    public Course assignInstructor(Long courseId, Long instructorId) {
+
+        Course course = courseRepository.findById(courseId)
+                .orElseThrow(() -> new RuntimeException("Course not found"));
+
+        User instructor = userRepository.findById(instructorId)
+                .orElseThrow(() -> new RuntimeException("Instructor not found"));
+
+        if (!instructor.getRole().getName().equals("INSTRUCTOR")) {
+            throw new RuntimeException("User is not an instructor");
+        }
+
+        course.setInstructor(instructor);
+
+        return courseRepository.save(course);
     }
 }
