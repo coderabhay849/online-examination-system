@@ -1,0 +1,19 @@
+services:
+
+  postgres:
+    image: postgres:16
+    container_name: online-examination-postgres
+    environment:
+      POSTGRES_DB: online_examination_db
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: Abhay@123
+    ports:
+      - "5432:5432"
+
+  app:
+    build: .
+    container_name: online-examination-app
+    ports:
+      - "9096:9096"
+    depends_on:
+      - postgres
